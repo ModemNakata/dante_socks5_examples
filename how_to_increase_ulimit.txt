@@ -1,0 +1,31 @@
+# temporary
+ulimit -n 65535
+
+# permanent
+
+# nano /etc/security/limits.conf
+
+# for all users *
+* soft nofile 65535
+* hard nofile 65535
+
+root soft nofile 65535
+root hard nofile 65535
+
+# if dante/sockd is run under `proxy` user
+proxy soft nofile 65535
+proxy hard nofile 65535
+
+
+
+
+# Why?
+dante needs ulimit to be inceased to use more file descriptors (e.g. more parallel connections)
+
+### before
+root@vds-remote:~# ulimit -n
+1024
+
+### after
+root@vds-remote:~# ulimit -n
+65535
