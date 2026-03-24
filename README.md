@@ -21,3 +21,43 @@ download & run this perl script: https://www.inet.no/dante/files/maxconn.pl
 
 
 =======
+
+
+Measure perfomance of socks server bandwidth usage with vnstat:
+
+# Debian/Ubuntu
+sudo apt update && sudo apt install vnstat
+
+This saves historical data of network load.
+
+sudo systemctl enable --now vnstat
+(though neabled by default)
+
+Hourly History (The last 24 hours):
+vnstat -h
+This provides a text-based bar graph showing exactly which hour had the highest rx (received) and tx (transmitted) traffic.
+
+Daily History:
+vnstat -d
+Useful to see if specific days of the week are heavier than others.
+
+Top 10 Days:
+vnstat -t
+Shows your all-time record-breaking traffic days.
+
+
+
+Live performance:
+vnstat -l -i eth0
+
+(eth0 from `ip a`)
+
+Options for low-end `alerts`
+
+Because your VPS is low-end, you might want to know if Dante is pushing the bandwidth limit without having to log in and check. You can output the data as JSON for a simple script:
+
+vnstat --json h 1
+
+This gives you the last hour's data in a parseable format. You could write a tiny Python or Bash script that runs via cron and sends you a notification if tx exceeds a certain threshold (e.g., if your VPS has a 1TB monthly cap).
+
+
