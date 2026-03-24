@@ -25,7 +25,7 @@ download & run this perl script: https://www.inet.no/dante/files/maxconn.pl
 
 Measure perfomance of socks server bandwidth usage with vnstat:
 
-# Debian/Ubuntu
+Debian/Ubuntu
 sudo apt update && sudo apt install vnstat
 
 This saves historical data of network load.
